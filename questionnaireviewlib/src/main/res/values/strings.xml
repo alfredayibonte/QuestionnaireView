@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Question</string>
+    <string name="back">BACK</string>
+    <string name="next">NEXT</string>
+</resources>

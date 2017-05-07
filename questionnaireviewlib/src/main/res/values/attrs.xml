@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="fontStyle">
+        <enum name="medium" value ="1"/>
+        <enum name="thin" value ="2"/>
+        <enum name="thin_italic" value="3"/>
+        <enum name="bold" value ="4"/>
+        <enum name="bold_italic" value ="5"/>
+        <enum name="italic" value ="6"/>
+        <enum name="light" value="7"/>
+        <enum name="light_italic" value="8"/>
+        <enum name="regular" value="9"/>
+        <enum name="lt_regular" value="10"/>
+    </attr>
+    <attr name="view_type">
+        <enum name="radio" value ="1"/>
+        <enum name="checklist" value ="2"/>
+        <enum name="text_input" value="3"/>
+    </attr>
+    <declare-styleable name="QuestionBaseView">
+        <attr name="question" format="string"/>
+        <attr name="entries" format="reference"/>
+        <attr name="view_type"/>
+    </declare-styleable>
+
+    <declare-styleable name="Button">
+        <attr name="fontStyle"/>
+    </declare-styleable>
+
+    <declare-styleable name="TextView">
+        <attr name="fontStyle"/>
+    </declare-styleable>
+
+    <declare-styleable name="BezelImageView">
+        <attr name="maskDrawable" format="reference" />
+        <attr name="borderDrawable" format="reference" />
+        <attr name="desaturateOnPress" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="BaseTheme">
+        <attr name="actionBarIconColor" format="color" />
+        <attr name="actionBarInsetStart" format="dimension" />
+        <attr name="spinnerBarInsetStart" format="dimension" />
+        <attr name="popupItemBackground" format="reference" />
+        <attr name="photoItemForeground" format="reference" />
+        <attr name="photoItemForegroundBorderless" format="reference" />
+        <attr name="imageItemBackground" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="nn">
+        <attr name="shadowDrawable" format="reference" />
+        <attr name="shadowVisible" format="boolean" />
+    </declare-styleable>
+
+</resources>

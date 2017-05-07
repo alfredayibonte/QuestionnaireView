@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.alfredayibonte.questionnaireviewlib.RadioListItemView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:id="@+id/radio_list_item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.AppCompatRadioButton
+        android:padding="10dp"
+        android:id="@+id/radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv1"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:text="Exforge"
+        android:textSize="@dimen/question_normal_text"
+        />
+</com.alfredayibonte.questionnaireviewlib.RadioListItemView>
