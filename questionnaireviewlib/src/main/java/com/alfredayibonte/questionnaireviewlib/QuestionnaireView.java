@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.text.InputType;
 import android.util.AttributeSet;
+import android.view.inputmethod.EditorInfo;
 import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -77,7 +78,7 @@ public class QuestionnaireView extends RelativeLayout {
         addView(listView );
 
         //creation & addition of editText
-        editTv = new EditText(context, attrs);
+        editTv = new EditText(context);
         editTv.setVisibility(GONE);
         editTv.setId(android.R.id.text1);
         editTv.setLayoutParams(
@@ -89,7 +90,8 @@ public class QuestionnaireView extends RelativeLayout {
                         .create()
         );
         editTv.setInputType(InputType.TYPE_CLASS_TEXT);
-//        editTv.setImeOptions(IME);
+        editTv.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        addView(editTv );
 
     }
 
@@ -133,10 +135,6 @@ public class QuestionnaireView extends RelativeLayout {
                 break;
         }
 
-    }
-
-    public void addOnEditorActionListener(EditText.OnEditorActionListener editorActionListener){
-        editTv.setOnEditorActionListener(editorActionListener);
     }
 
 
@@ -185,6 +183,15 @@ public class QuestionnaireView extends RelativeLayout {
         if (radioAdapter != null)
             radioAdapter.addListener(radioListener);
     }
+
+    public void addOnEditorActionListener(EditText.OnEditorActionListener editorActionListener){
+        editTv.setOnEditorActionListener(editorActionListener);
+    }
+
+    public String getResponseFromEditText(){
+        return editTv.getText().toString();
+    }
+
 
 
     private void makeListViewVisible(){
