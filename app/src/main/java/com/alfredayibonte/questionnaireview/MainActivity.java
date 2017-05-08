@@ -14,37 +14,29 @@ import com.alfredayibonte.questionnaireviewlib.adapters.CheckListAdapter;
 import com.alfredayibonte.questionnaireviewlib.adapters.RadioListAdapter;
 import com.alfredayibonte.questionnaireviewlib.models.Answer;
 import com.alfredayibonte.questionnaireviewlib.utils.AnswerType;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
-        CheckListAdapter.OnCheckItemClickListener,
-        RadioListAdapter.OnRadioItemClickListener, TextView.OnEditorActionListener {
+        RadioListAdapter.OnRadioItemClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         QuestionnaireView questionnaireView = (QuestionnaireView)findViewById(R.id.questionnaire);
-        questionnaireView.setQuestion("What is the name of moses' father ?");
-        questionnaireView.setViewType(AnswerType.EDITTEXT);
+        questionnaireView.setQuestion("What is the name of this library ?");
+        questionnaireView.setViewType(AnswerType.CHECKLIST);
+        CharSequence[] answers = new CharSequence[]{
+                "Questionnaire", "QuestionnaireView", "Question"};
+        questionnaireView.setAnswers(answers);
         questionnaireView.addRadioItemListener(this);
-        questionnaireView.addCheckItemListener(this);
-        questionnaireView.addOnEditorActionListener(this);
     }
 
-    @Override
-    public void onCheckItemClick(List<Answer> answers) {
-        Log.e("check answers:", answers.toString());
-    }
 
     @Override
     public void onRadioItemClick(List<Answer> answers) {
         Log.e("radio answers: ", answers.toString());
-    }
-
-    @Override
-    public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-
-        return (i == EditorInfo.IME_ACTION_DONE);
     }
 }
