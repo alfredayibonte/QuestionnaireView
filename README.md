@@ -49,8 +49,9 @@ APIs offered by **QuestionnaireView**.
 |APIs | Usage|
 |---|---|
 |setQuestion(String text)|Set the question on a webview|
-|setViewType(int viewType)|Set the viewType to either radio, edittext or check list|
+|setViewType(int viewType)|Set the viewType to either RADIO, EDITTEXT or CHECKLIST|
 |addRadioItemListener(OnRadioItemClickListener listener)|Sets  a listener for radioButton|
 |addCheckItemListener(OnCheckItemClickListener listener)|Sets a listener for check list|
 |addOnEditorActionListener(OnEditorActionListener listener)|Sets a listener for EditText|
+|addTextChangedListener(TextWatcher watcher)|Sets a watcher for EditText|
 |setAnswers(CharSequence[] answers)|Sets all possible answers for radio and checklist|
