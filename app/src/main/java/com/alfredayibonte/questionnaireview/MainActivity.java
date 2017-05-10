@@ -1,21 +1,14 @@
 package com.alfredayibonte.questionnaireview;
 
-import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.TextView;
 
 import com.alfredayibonte.questionnaireviewlib.QuestionnaireView;
-import com.alfredayibonte.questionnaireviewlib.adapters.CheckListAdapter;
 import com.alfredayibonte.questionnaireviewlib.adapters.RadioListAdapter;
 import com.alfredayibonte.questionnaireviewlib.models.Answer;
 import com.alfredayibonte.questionnaireviewlib.utils.AnswerType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
@@ -27,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
         QuestionnaireView questionnaireView = (QuestionnaireView)findViewById(R.id.questionnaire);
         questionnaireView.setQuestion("What is the name of this library ?");
-        questionnaireView.setViewType(AnswerType.CHECKLIST);
+        questionnaireView.setViewType(AnswerType.RADIO);
         CharSequence[] answers = new CharSequence[]{
                 "Questionnaire", "QuestionnaireView", "Question"};
         questionnaireView.setAnswers(answers);
