@@ -179,7 +179,7 @@ public class QuestionnaireView extends RelativeLayout {
     public void setAnswers(ArrayList<String> answers){
         this.answers = new ArrayList<>();
         for(String item : answers)
-            this.answers.add(new Answer(String.valueOf(item)));
+            this.answers.add(new Answer(item));
         setAnswers(this.answers);
     }
 
