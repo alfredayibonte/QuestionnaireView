@@ -12,7 +12,7 @@ allprojects {
 	}
 }
 dependencies {
-	compile 'com.github.alfredayibonte:QuestionnaireView:-SNAPSHOT'
+	compile 'com.github.alfredayibonte:QuestionnaireView:0.1.1'
 }
 ```
 
