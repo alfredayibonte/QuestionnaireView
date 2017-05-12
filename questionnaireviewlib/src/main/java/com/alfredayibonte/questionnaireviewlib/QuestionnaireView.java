@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.inputmethod.EditorInfo;
 import android.webkit.WebView;
@@ -78,7 +79,7 @@ public class QuestionnaireView extends RelativeLayout {
         addView(listView );
 
         //creation & addition of editText
-        editTv = new EditText(context);
+        editTv = new EditText(context, attrs);
         editTv.setVisibility(GONE);
         editTv.setId(android.R.id.text1);
         editTv.setLayoutParams(
@@ -154,12 +155,6 @@ public class QuestionnaireView extends RelativeLayout {
 
     public void setAnswers(List<Answer> answers){
         this.answers = answers;
-    }
-
-    public void setAnswers(CharSequence[] answers){
-        this.answers = new ArrayList<>();
-        for(CharSequence item : answers)
-            this.answers.add(new Answer(String.valueOf(item)));
         switch (viewType){
             case AnswerType.CHECKLIST:
                 checkAdapter = new CheckListAdapter(getContext(), this.answers);
@@ -170,7 +165,22 @@ public class QuestionnaireView extends RelativeLayout {
                 listView.setAdapter(radioAdapter);
                 break;
         }
-        if(question != null) question.setAnswers(this.answers);
+        if(question != null && !answers.isEmpty())
+            question.setAnswers(this.answers);
+    }
+
+    public void setAnswers(CharSequence[] answers){
+        this.answers = new ArrayList<>();
+        for(CharSequence item : answers)
+            this.answers.add(new Answer(String.valueOf(item)));
+        setAnswers(this.answers);
+    }
+
+    public void setAnswers(ArrayList<String> answers){
+        this.answers = new ArrayList<>();
+        for(String item : answers)
+            this.answers.add(new Answer(item));
+        setAnswers(this.answers);
     }
 
 
@@ -188,7 +198,12 @@ public class QuestionnaireView extends RelativeLayout {
         editTv.setOnEditorActionListener(editorActionListener);
     }
 
-    public String getResponseFromEditText(){
+    public void addTextChangedListener(TextWatcher textWatcher){
+        editTv.addTextChangedListener(textWatcher);
+    }
+
+
+    public String getTextFromEditText(){
         return editTv.getText().toString();
     }
 

@@ -1,35 +1,37 @@
 package com.alfredayibonte.questionnaireview;
 
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
-
 import com.alfredayibonte.questionnaireviewlib.QuestionnaireView;
-import com.alfredayibonte.questionnaireviewlib.adapters.RadioListAdapter;
-import com.alfredayibonte.questionnaireviewlib.models.Answer;
 import com.alfredayibonte.questionnaireviewlib.utils.AnswerType;
 
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity implements
-        RadioListAdapter.OnRadioItemClickListener {
+public class MainActivity extends AppCompatActivity implements TextWatcher {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         QuestionnaireView questionnaireView = (QuestionnaireView)findViewById(R.id.questionnaire);
-        questionnaireView.setQuestion("What is the name of this library ?");
-        questionnaireView.setViewType(AnswerType.RADIO);
-        CharSequence[] answers = new CharSequence[]{
-                "Questionnaire", "QuestionnaireView", "Question"};
-        questionnaireView.setAnswers(answers);
-        questionnaireView.addRadioItemListener(this);
+        questionnaireView.setQuestion("<h1 style='color: red;'>What is the name of this library ?</h1>");
+        questionnaireView.setViewType(AnswerType.EDITTEXT);
+        questionnaireView.addTextChangedListener(this);
     }
 
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
 
     @Override
-    public void onRadioItemClick(List<Answer> answers) {
-        Log.e("radio answers: ", answers.toString());
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        Log.e(MainActivity.class.getSimpleName(), charSequence.toString());
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+
     }
 }
