@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+
 import com.alfredayibonte.questionnaireviewlib.QuestionnaireView;
 import com.alfredayibonte.questionnaireviewlib.utils.AnswerType;
 
@@ -18,6 +21,16 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
         questionnaireView.setQuestion("<h1 style='color: red;'>What is the name of this library ?</h1>");
         questionnaireView.setViewType(AnswerType.EDITTEXT);
         questionnaireView.addTextChangedListener(this);
+        View view = View.inflate(this, R.layout.footer, null);
+        Button btn = (Button) view.findViewById(R.id.next);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("NEXT::", "Next button clicked");
+            }
+        });
+        questionnaireView.addFooter(view);
+
     }
 
     @Override

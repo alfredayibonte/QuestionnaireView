@@ -3,9 +3,11 @@ package com.alfredayibonte.questionnaireviewlib;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.webkit.WebView;
 import android.widget.EditText;
@@ -33,6 +35,7 @@ public class QuestionnaireView extends RelativeLayout {
     private List<Answer> answers;
     private RadioListAdapter radioAdapter;
     private CheckListAdapter checkAdapter;
+    private View view;
     public QuestionnaireView(Context context) {
         super(context);
     }
@@ -176,6 +179,10 @@ public class QuestionnaireView extends RelativeLayout {
         setAnswers(this.answers);
     }
 
+    /**
+     *
+     * @param answers
+     */
     public void setAnswers(ArrayList<String> answers){
         this.answers = new ArrayList<>();
         for(String item : answers)
@@ -189,11 +196,19 @@ public class QuestionnaireView extends RelativeLayout {
             checkAdapter.addListener(checkListener);
     }
 
+    /**
+     *
+     * @param radioListener
+     */
     public void addRadioItemListener(RadioListAdapter.OnRadioItemClickListener radioListener) {
         if (radioAdapter != null)
             radioAdapter.addListener(radioListener);
     }
 
+    /**
+     *
+     * @param editorActionListener
+     */
     public void addOnEditorActionListener(EditText.OnEditorActionListener editorActionListener){
         editTv.setOnEditorActionListener(editorActionListener);
     }
@@ -212,6 +227,35 @@ public class QuestionnaireView extends RelativeLayout {
     private void makeListViewVisible(){
         listView.setVisibility(VISIBLE);
         editTv.setVisibility(GONE);
+    }
+
+    /**
+     *
+     * @param layout layout file (eg. R.layout.footer)
+     */
+    public void addFooter(int layout){
+        View view = View.inflate(getContext(), layout, null);
+        addFooter(view);
+    }
+
+    /**
+     *
+     * @param view adds view to parent bottom
+     */
+    public void addFooter(View view){
+        if( view == null ) return;
+        view.setBackgroundColor(ContextCompat.getColor(getContext(),
+                android.R.color.transparent));
+        view.setLayoutParams(
+                new LayoutBuilder()
+                        .addWidth(LayoutParams.MATCH_PARENT)
+                        .addHeight(LayoutParams.WRAP_CONTENT)
+                        .addRule(ALIGN_PARENT_BOTTOM, getId())
+                        .create()
+        );
+        addView(view);
+
+
     }
 
     public Question getQuestion(){
