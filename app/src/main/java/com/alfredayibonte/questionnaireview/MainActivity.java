@@ -1,50 +1,46 @@
 package com.alfredayibonte.questionnaireview;
 
+import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.view.MenuItem;
 
-import com.alfredayibonte.questionnaireviewlib.QuestionnaireView;
-import com.alfredayibonte.questionnaireviewlib.utils.AnswerType;
-
-public class MainActivity extends AppCompatActivity implements TextWatcher {
+public class MainActivity extends AppCompatActivity implements QuestionFragment.OnQuestionItemSelectedListener {
+    private NonSwipeableViewPager mPager;
+    private PagerAdapter mPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        QuestionnaireView questionnaireView = (QuestionnaireView)findViewById(R.id.questionnaire);
-        questionnaireView.setQuestion("<h1 style='color: red;'>What is the name of this library ?</h1>");
-        questionnaireView.setViewType(AnswerType.EDITTEXT);
-        questionnaireView.addTextChangedListener(this);
-        View view = View.inflate(this, R.layout.footer, null);
-        Button btn = (Button) view.findViewById(R.id.next);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.e("NEXT::", "Next button clicked");
-            }
-        });
-        questionnaireView.addFooter(view);
+        mPager = (NonSwipeableViewPager)findViewById(R.id.pager);
+        AppController app = (AppController) getApplication();
+        mPagerAdapter = new QuestionPagerAdapter(getApplicationContext(),
+                getSupportFragmentManager(), app.getQuestions());
+        mPager.setAdapter(mPagerAdapter);
 
     }
 
     @Override
-    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
 
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        Log.e(MainActivity.class.getSimpleName(), charSequence.toString());
+    public void onPreviousButtonPressed() {
+        int page = mPager.getCurrentItem();
+        mPager.setCurrentItem( page - 1 );
     }
 
     @Override
-    public void afterTextChanged(Editable editable) {
-
+    public void onNextButtonPressed() {
+        int page = mPager.getCurrentItem();
+        mPager.setCurrentItem( page + 1 );
     }
 }

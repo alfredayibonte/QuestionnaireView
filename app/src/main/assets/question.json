@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "answers": [
+      "a",
+      "b",
+      "c"
+    ],
+    "answer": [
+      "a"
+    ],
+    "content": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. <strong>Velit</strong> earum saepe iste nesciunt dolor corporis, distinctio <em>repudiandae</em> aliquid consectetur impedit eveniet facilis eius nisi nobis a porro quis consequatur harum?</p>\n",
+    "answer_type": 1,
+    "difficulty": 1,
+    "created_at": "2016-10-23T11:33:59.544Z",
+    "updated_at": "2017-01-12T21:57:28.970Z"
+  },
+  {
+    "id": 2,
+    "answers": [
+      "John"
+    ],
+    "answer": [
+      "John"
+    ],
+    "content": "<p>What is Abraham's name met, consectetur adipisicing elit. Est nihil pariatur expedita eum ut deserunt error ullam aliquid obcaecati iusto cumque sit, praesentium provident doloribus, rerum doloremque totam reprehenderit inventore.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est nihil pariatur expedita eum ut deserunt error ullam aliquid obcaecati iusto cumque sit, praesentium provident doloribus, rerum doloremque totam reprehenderit inventore.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est nihil pariatur expedita eum ut deserunt error ullam aliquid obcaecati iusto cumque sit, praesentium provident doloribus, rerum doloremque totam reprehenderit inventore.</p>\n",
+    "answer_type": 3,
+    "difficulty": 4,
+    "created_at": "2017-01-20T22:27:51.110Z",
+    "updated_at": "2017-01-20T22:27:51.110Z"
+  },
+  {
+    "id": 3,
+    "answers": [
+      "(A - B)(A + B)",
+      "AB",
+      "A+B*A",
+      "(A + B)(A + B)",
+      "(A + B)(A - B)"
+    ],
+    "answer": [
+      "(A - B)(A + B)",
+      "(A + B)(A - B)"
+    ],
+    "content": "<p><span style=\"font-size:48px;\">A<sup>2&nbsp;</sup>- B<sup>2 </sup>= ?</span></p>\n",
+    "answer_type": 2,
+    "difficulty": 1,
+    "created_at": "2017-01-20T22:30:33.216Z",
+    "updated_at": "2017-01-20T22:30:33.216Z"
+  }
+]
