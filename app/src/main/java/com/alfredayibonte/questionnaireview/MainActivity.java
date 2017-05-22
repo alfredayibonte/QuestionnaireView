@@ -3,7 +3,8 @@ package com.alfredayibonte.questionnaireview;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
+
+import com.alfredayibonte.questionnaireviewlib.models.Question;
 
 public class MainActivity extends AppCompatActivity implements QuestionFragment.OnQuestionItemSelectedListener {
     private NonSwipeableViewPager mPager;
@@ -22,24 +23,13 @@ public class MainActivity extends AppCompatActivity implements QuestionFragment.
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onPreviousButtonPressed() {
+    public void onPreviousButtonPressed(Question question) {
         int page = mPager.getCurrentItem();
         mPager.setCurrentItem( page - 1 );
     }
 
     @Override
-    public void onNextButtonPressed() {
+    public void onNextButtonPressed(Question question) {
         int page = mPager.getCurrentItem();
         mPager.setCurrentItem( page + 1 );
     }

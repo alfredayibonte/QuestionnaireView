@@ -20,6 +20,14 @@
     <declare-styleable name="QuestionBaseView">
         <attr name="question" format="string"/>
         <attr name="entries" format="reference"/>
+        <attr name="android:textColor" />
+        <attr name="android:textColorHighlight" />
+        <attr name="android:textColorHint" />
+        <attr name="android:textColorLink" />
+        <attr name="android:textSize" />
+        <attr name="android:background" />
+        <attr name="android:backgroundTint" />
+        <attr name="android:backgroundTintMode" />
         <attr name="view_type"/>
     </declare-styleable>
 

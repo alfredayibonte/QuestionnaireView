@@ -12,15 +12,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import com.alfredayibonte.questionnaireviewlib.QuestionnaireView;
+import com.alfredayibonte.questionnaireviewlib.adapters.CheckListAdapter;
+import com.alfredayibonte.questionnaireviewlib.adapters.RadioListAdapter;
+import com.alfredayibonte.questionnaireviewlib.models.Answer;
 import com.alfredayibonte.questionnaireviewlib.models.Question;
-import com.alfredayibonte.questionnaireviewlib.utils.AnswerType;
 import java.util.ArrayList;
+import java.util.List;
 import static com.alfredayibonte.questionnaireview.QuestionPagerAdapter.ANSWERS_KEY;
 import static com.alfredayibonte.questionnaireview.QuestionPagerAdapter.ANSWER_TYPE_KEY;
 import static com.alfredayibonte.questionnaireview.QuestionPagerAdapter.POSITION_KEY;
 import static com.alfredayibonte.questionnaireview.QuestionPagerAdapter.QUESTION_KEY;
 
-public class QuestionFragment extends Fragment implements TextWatcher {
+public class QuestionFragment extends Fragment implements TextWatcher,
+        CheckListAdapter.OnCheckItemClickListener, RadioListAdapter.OnRadioItemClickListener {
     OnQuestionItemSelectedListener mCallback;
     Question question;
     ArrayList<String> answers;
@@ -47,6 +51,8 @@ public class QuestionFragment extends Fragment implements TextWatcher {
         questionnaireView.setQuestion(question.getContent());
         questionnaireView.setViewType(question.getAnswer_type());
         questionnaireView.setAnswers(answers);
+        questionnaireView.addRadioItemListener(this);
+        questionnaireView.addCheckItemListener(this);
         questionnaireView.addTextChangedListener(this);
         View view = View.inflate(getContext(), R.layout.footer, null);
         Button next = (Button) view.findViewById(R.id.next);
@@ -54,14 +60,14 @@ public class QuestionFragment extends Fragment implements TextWatcher {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mCallback.onNextButtonPressed();
+                mCallback.onNextButtonPressed(question);
             }
         });
         questionnaireView.addFooter(view);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mCallback.onPreviousButtonPressed();
+                mCallback.onPreviousButtonPressed(question);
             }
         });
 
@@ -83,9 +89,19 @@ public class QuestionFragment extends Fragment implements TextWatcher {
 
     }
 
+    @Override
+    public void onCheckItemClick(List<Answer> answers) {
+        //todo: get answers here if check list
+    }
+
+    @Override
+    public void onRadioItemClick(List<Answer> answers) {
+        //todo: get answers here if radio
+    }
+
     public interface OnQuestionItemSelectedListener{
-        public void onPreviousButtonPressed();
-        public void onNextButtonPressed();
+        public void onPreviousButtonPressed(Question question);
+        public void onNextButtonPressed(Question question);
     }
 
     @Override

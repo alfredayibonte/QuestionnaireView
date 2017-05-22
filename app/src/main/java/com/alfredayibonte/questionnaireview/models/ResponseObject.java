@@ -8,9 +8,9 @@ import java.util.Date;
  * Created by Alfredayibonte on 5/18/17.
  */
 
-public class ResultObject {
+public class ResponseObject {
 
-    public ResultObject(){}
+    public ResponseObject(){}
 
     public int getId() {
         return id;

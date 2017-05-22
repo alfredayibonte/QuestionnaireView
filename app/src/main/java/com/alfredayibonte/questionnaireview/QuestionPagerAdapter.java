@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.alfredayibonte.questionnaireview.models.ResultObject;
+import com.alfredayibonte.questionnaireview.models.ResponseObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class QuestionPagerAdapter extends FragmentStatePagerAdapter {
     protected static final String QUESTION_KEY = "QUESTION";
     protected static final String ANSWERS_KEY = "ANSWERS";
     protected static final String ANSWER_TYPE_KEY = "ANSWER_TYPE";
-    List<ResultObject> questions;
+    List<ResponseObject> questions;
     public QuestionPagerAdapter(Context context,
                                 FragmentManager fm){
         super(fm);
@@ -26,7 +26,7 @@ public class QuestionPagerAdapter extends FragmentStatePagerAdapter {
         questions = new ArrayList<>();
     }
 
-    public QuestionPagerAdapter(Context context, FragmentManager fm, List<ResultObject> questions){
+    public QuestionPagerAdapter(Context context, FragmentManager fm, List<ResponseObject> questions){
         this(context, fm);
         this.questions = questions;
     }

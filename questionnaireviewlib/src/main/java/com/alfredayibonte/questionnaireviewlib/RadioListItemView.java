@@ -2,9 +2,9 @@ package com.alfredayibonte.questionnaireviewlib;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatRadioButton;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import com.alfredayibonte.questionnaireviewlib.adapters.RadioListAdapter;
 import com.alfredayibonte.questionnaireviewlib.models.Answer;
 
@@ -15,7 +15,7 @@ import com.alfredayibonte.questionnaireviewlib.models.Answer;
  */
 public class RadioListItemView extends LinearLayout{
     private AppCompatRadioButton radioButton;
-    private TextView textView;
+    private AppCompatTextView textView;
     private Answer answer;
     private Context context;
     private RadioListAdapter adapter;
@@ -43,7 +43,7 @@ public class RadioListItemView extends LinearLayout{
     protected void onFinishInflate() {
         super.onFinishInflate();
         radioButton = (AppCompatRadioButton) findViewById(R.id.radio);
-        textView = (TextView)findViewById(R.id.tv1);
+        textView = (AppCompatTextView)findViewById(R.id.tv1);
 
     }
 
