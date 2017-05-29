@@ -3,9 +3,12 @@ package com.alfredayibonte.questionnaireviewlib;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatEditText;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.webkit.WebView;
 import android.widget.EditText;
@@ -15,7 +18,7 @@ import com.alfredayibonte.questionnaireviewlib.adapters.CheckListAdapter;
 import com.alfredayibonte.questionnaireviewlib.adapters.RadioListAdapter;
 import com.alfredayibonte.questionnaireviewlib.models.Answer;
 import com.alfredayibonte.questionnaireviewlib.models.Question;
-import com.alfredayibonte.questionnaireviewlib.utils.AnswerType;
+import com.alfredayibonte.questionnaireviewlib.utils.ViewType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +28,7 @@ import java.util.List;
  */
 
 public class QuestionnaireView extends RelativeLayout {
-    private EditText editTv;
+    private AppCompatEditText editTv;
     private WebView webview;
     private ListView listView;
     private int viewType;
@@ -33,22 +36,31 @@ public class QuestionnaireView extends RelativeLayout {
     private List<Answer> answers;
     private RadioListAdapter radioAdapter;
     private CheckListAdapter checkAdapter;
+    private View view;
     public QuestionnaireView(Context context) {
-        super(context);
+        this(context, null, 0);
     }
 
     public QuestionnaireView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        drawInnerViews(context, attrs);
+        this(context, attrs, 0);
+    }
+
+    public QuestionnaireView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
         if (!isInEditMode()) {
-            parseAttributes(context, attrs);
+            parseAttributes(context, attrs, defStyleAttr);
         }
+
     }
 
     private void drawInnerViews(Context context, AttributeSet attrs){
+        float density = context.getResources().getDisplayMetrics().density;
+        int value16 = (int)(16*density);
+        int value10 = (int)(10*density);
+        int value40 = (int)(40*density);
         LayoutParams mainLayoutParams = new LayoutParams(
                 LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-        mainLayoutParams.setMargins(16,16,16,16);
+        mainLayoutParams.setMargins(value16,value16,value16,value16);
         setLayoutParams(mainLayoutParams);
 
         //creation & addition of webview
@@ -58,7 +70,7 @@ public class QuestionnaireView extends RelativeLayout {
                 new LayoutBuilder()
                         .addWidth(LayoutParams.MATCH_PARENT)
                         .addHeight(LayoutParams.WRAP_CONTENT)
-                        .setMargin(0,40,0,0)
+                        .setMargin(value10,value40,0,0)
                         .create()
         );
         webview.getSettings();
@@ -72,21 +84,21 @@ public class QuestionnaireView extends RelativeLayout {
                 new LayoutBuilder()
                         .addWidth(LayoutParams.MATCH_PARENT)
                         .addHeight(LayoutParams.WRAP_CONTENT)
-                        .setMargin(0,10,0,0)
+                        .setMargin(0,value10,0,0)
                         .addRule(BELOW, webview.getId() )
                         .create()
         );
         addView(listView );
 
         //creation & addition of editText
-        editTv = new EditText(context, attrs);
+        editTv = new AppCompatEditText(context, attrs);
         editTv.setVisibility(GONE);
         editTv.setId(android.R.id.text1);
         editTv.setLayoutParams(
                 new LayoutBuilder()
                         .addWidth(LayoutParams.MATCH_PARENT)
                         .addHeight(LayoutParams.WRAP_CONTENT)
-                        .setMargin(0, 10, 0, 0)
+                        .setMargin(value10, value10, 0, 0)
                         .addRule(BELOW, webview.getId())
                         .create()
         );
@@ -96,21 +108,16 @@ public class QuestionnaireView extends RelativeLayout {
 
     }
 
-    public QuestionnaireView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        if (!isInEditMode()) {
-            parseAttributes(context, attrs);
-        }
-    }
-
-    private void parseAttributes(Context context, AttributeSet attrs) {
+    private void parseAttributes(Context context, AttributeSet attrs, int defStyleAttr) {
+        drawInnerViews(context, attrs);
         TypedArray values = context.obtainStyledAttributes(attrs, R.styleable.QuestionBaseView);
-        int position = values.getInt(R.styleable.QuestionBaseView_view_type, 1);
-        setViewType(position);
+        int viewType = values.getInt(R.styleable.QuestionBaseView_view_type, 1);
+        setViewType(viewType);
         String text = values.getString(R.styleable.QuestionBaseView_question);
         setQuestion(text);
         CharSequence[] answers =  values.getTextArray(R.styleable.QuestionBaseView_entries);
         if(answers != null) setAnswers(answers);
+
         values.recycle();
     }
 
@@ -126,11 +133,11 @@ public class QuestionnaireView extends RelativeLayout {
         if(question != null)
             question.setAnswer_type(viewType);
         switch (viewType){
-            case AnswerType.RADIO:
-            case AnswerType.CHECKLIST:
+            case ViewType.RADIO:
+            case ViewType.CHECKLIST:
                 makeListViewVisible();
                 break;
-            case AnswerType.EDITTEXT:
+            case ViewType.EDITTEXT:
                 listView.setVisibility(GONE);
                 editTv.setVisibility(VISIBLE);
                 break;
@@ -156,11 +163,11 @@ public class QuestionnaireView extends RelativeLayout {
     public void setAnswers(List<Answer> answers){
         this.answers = answers;
         switch (viewType){
-            case AnswerType.CHECKLIST:
+            case ViewType.CHECKLIST:
                 checkAdapter = new CheckListAdapter(getContext(), this.answers);
                 listView.setAdapter(checkAdapter);
                 break;
-            case AnswerType.RADIO:
+            case ViewType.RADIO:
                 radioAdapter = new RadioListAdapter(getContext(), this.answers);
                 listView.setAdapter(radioAdapter);
                 break;
@@ -176,6 +183,10 @@ public class QuestionnaireView extends RelativeLayout {
         setAnswers(this.answers);
     }
 
+    /**
+     *
+     * @param answers
+     */
     public void setAnswers(ArrayList<String> answers){
         this.answers = new ArrayList<>();
         for(String item : answers)
@@ -189,11 +200,19 @@ public class QuestionnaireView extends RelativeLayout {
             checkAdapter.addListener(checkListener);
     }
 
+    /**
+     *
+     * @param radioListener
+     */
     public void addRadioItemListener(RadioListAdapter.OnRadioItemClickListener radioListener) {
         if (radioAdapter != null)
             radioAdapter.addListener(radioListener);
     }
 
+    /**
+     *
+     * @param editorActionListener
+     */
     public void addOnEditorActionListener(EditText.OnEditorActionListener editorActionListener){
         editTv.setOnEditorActionListener(editorActionListener);
     }
@@ -212,6 +231,35 @@ public class QuestionnaireView extends RelativeLayout {
     private void makeListViewVisible(){
         listView.setVisibility(VISIBLE);
         editTv.setVisibility(GONE);
+    }
+
+    /**
+     *
+     * @param layout layout file (eg. R.layout.footer)
+     */
+    public void addFooter(int layout){
+        View view = View.inflate(getContext(), layout, null);
+        addFooter(view);
+    }
+
+    /**
+     *
+     * @param view adds view to parent bottom
+     */
+    public void addFooter(View view){
+        if( view == null ) return;
+        view.setBackgroundColor(ContextCompat.getColor(getContext(),
+                android.R.color.transparent));
+        view.setLayoutParams(
+                new LayoutBuilder()
+                        .addWidth(LayoutParams.MATCH_PARENT)
+                        .addHeight(LayoutParams.WRAP_CONTENT)
+                        .addRule(ALIGN_PARENT_BOTTOM, getId())
+                        .create()
+        );
+        addView(view);
+
+
     }
 
     public Question getQuestion(){

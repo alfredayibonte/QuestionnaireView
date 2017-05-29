@@ -20,18 +20,19 @@ import java.util.List;
 public class CheckListAdapter extends BaseAdapter {
     private  List<Answer> answers = new ArrayList<>();
     private Context context;
-    OnCheckItemClickListener listener;
+    private OnCheckItemClickListener listener;
+    private CheckListItemView checkItemView;
     public CheckListAdapter(Context context, List<Answer> answers) {
         this.context = context;
         this.answers = answers;
     }
-    public CheckListAdapter(Context context, List<Answer> answers, OnCheckItemClickListener listener) {
+    protected CheckListAdapter(Context context, List<Answer> answers, OnCheckItemClickListener listener) {
         this(context, answers);
         this.listener = listener;
 
     }
 
-    public CheckListAdapter( List<Answer> answers, OnCheckItemClickListener listener, Context context) {
+    protected CheckListAdapter( List<Answer> answers, OnCheckItemClickListener listener, Context context) {
         this(context, answers);
         this.listener = listener;
     }
@@ -41,6 +42,8 @@ public class CheckListAdapter extends BaseAdapter {
     public interface OnCheckItemClickListener {
         void onCheckItemClick(List<Answer> answers);
     }
+
+
 
     public void addListener(OnCheckItemClickListener listener){
         this.listener = listener;
@@ -67,7 +70,6 @@ public class CheckListAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         Answer answer = answers.get(position);
-        CheckListItemView checkItemView = null;
         if (convertView == null){
             checkItemView = (CheckListItemView)View.inflate(context, R.layout.check_list_item, null);
         }

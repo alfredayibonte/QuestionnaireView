@@ -4,18 +4,17 @@
     android:id="@+id/check_list_item"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <CheckBox
+    <android.support.v7.widget.AppCompatCheckBox
         android:padding="10dp"
         android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv1"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:padding="10dp"
-        android:text="Exforge"
         android:textSize="@dimen/question_normal_text"
         />
 </com.alfredayibonte.questionnaireviewlib.CheckListItemView>

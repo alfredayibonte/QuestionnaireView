@@ -1,37 +1,36 @@
 package com.alfredayibonte.questionnaireview;
 
+import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import com.alfredayibonte.questionnaireviewlib.QuestionnaireView;
-import com.alfredayibonte.questionnaireviewlib.utils.AnswerType;
 
-public class MainActivity extends AppCompatActivity implements TextWatcher {
+import com.alfredayibonte.questionnaireviewlib.models.Question;
+
+public class MainActivity extends AppCompatActivity implements QuestionFragment.OnQuestionItemSelectedListener {
+    private NonSwipeableViewPager mPager;
+    private PagerAdapter mPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        QuestionnaireView questionnaireView = (QuestionnaireView)findViewById(R.id.questionnaire);
-        questionnaireView.setQuestion("<h1 style='color: red;'>What is the name of this library ?</h1>");
-        questionnaireView.setViewType(AnswerType.EDITTEXT);
-        questionnaireView.addTextChangedListener(this);
-    }
-
-    @Override
-    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        mPager = (NonSwipeableViewPager)findViewById(R.id.pager);
+        AppController app = (AppController) getApplication();
+        mPagerAdapter = new QuestionPagerAdapter(getApplicationContext(),
+                getSupportFragmentManager(), app.getQuestions());
+        mPager.setAdapter(mPagerAdapter);
 
     }
 
     @Override
-    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        Log.e(MainActivity.class.getSimpleName(), charSequence.toString());
+    public void onPreviousButtonPressed(Question question) {
+        int page = mPager.getCurrentItem();
+        mPager.setCurrentItem( page - 1 );
     }
 
     @Override
-    public void afterTextChanged(Editable editable) {
-
+    public void onNextButtonPressed(Question question) {
+        int page = mPager.getCurrentItem();
+        mPager.setCurrentItem( page + 1 );
     }
 }

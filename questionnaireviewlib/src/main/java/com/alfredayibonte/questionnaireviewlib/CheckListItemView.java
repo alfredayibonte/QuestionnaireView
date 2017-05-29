@@ -1,10 +1,10 @@
 package com.alfredayibonte.questionnaireviewlib;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatCheckBox;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import com.alfredayibonte.questionnaireviewlib.adapters.CheckListAdapter;
 import com.alfredayibonte.questionnaireviewlib.models.Answer;
 
@@ -14,8 +14,8 @@ import com.alfredayibonte.questionnaireviewlib.models.Answer;
  *  Created by Alfredayibonte on 5/3/17.
  */
 public class CheckListItemView extends LinearLayout{
-    private CheckBox checkBox;
-    private TextView textView;
+    private AppCompatCheckBox checkBox;
+    private AppCompatTextView textView;
     private Answer answer;
     private Context context;
     private CheckListAdapter adapter;
@@ -42,8 +42,8 @@ public class CheckListItemView extends LinearLayout{
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        checkBox = (CheckBox)findViewById(R.id.checkbox);
-        textView = (TextView)findViewById(R.id.tv1);
+        checkBox = (AppCompatCheckBox)findViewById(R.id.checkbox);
+        textView = (AppCompatTextView)findViewById(R.id.tv1);
 
     }
 

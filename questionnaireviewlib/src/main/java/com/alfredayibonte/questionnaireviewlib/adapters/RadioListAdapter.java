@@ -22,7 +22,8 @@ import java.util.List;
 public class RadioListAdapter extends BaseAdapter{
     private  List<Answer> answers = new ArrayList<>();
     private Context context;
-    RadioListAdapter.OnRadioItemClickListener listener;
+    private RadioListAdapter.OnRadioItemClickListener listener;
+    private RadioListItemView radioListItemView = null;
 
     public RadioListAdapter(Context context, List<Answer> answers) {
         this.context = context;
@@ -58,10 +59,8 @@ public class RadioListAdapter extends BaseAdapter{
 
     public View getView(final int position, View convertView, ViewGroup parent) {
         Answer item = (Answer) getItem(position);
-        RadioListItemView radioListItemView = null;
         if (convertView == null) {
             radioListItemView = (RadioListItemView)View.inflate(context, R.layout.radio_list_item, null);
-
         } else{
             radioListItemView = (RadioListItemView)convertView;
         }
